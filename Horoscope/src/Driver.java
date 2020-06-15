@@ -13,11 +13,22 @@ import javax.swing.JTextArea;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+/**
+ * This class creates the GUI with radio buttons for the different zodiac signs
+ * and shows the respective message.
+ * 
+ * @author Vidit Makwana
+ *
+ */
 public class Driver extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
-	
+
 	JTextArea message;
 	DailyHoroscope today;
+
+	/**
+	 * This constructor creates the radio buttons, panel, and text for the GUI.
+	 */
 	public Driver() {
 		super(new BorderLayout());
 		today = new DailyHoroscope();
@@ -58,7 +69,7 @@ public class Driver extends JPanel implements ActionListener {
 		JRadioButton pisces = new JRadioButton("Pisces");
 		pisces.addActionListener(this);
 		group.add(pisces);
-		JPanel radioPanel = new JPanel(new GridLayout(1,0));
+		JPanel radioPanel = new JPanel(new GridLayout(1, 0));
 		radioPanel.add(aries);
 		radioPanel.add(taurus);
 		radioPanel.add(gemini);
@@ -72,34 +83,51 @@ public class Driver extends JPanel implements ActionListener {
 		radioPanel.add(aquarius);
 		radioPanel.add(pisces);
 		message = new JTextArea();
-		message.setFont(new Font(Font.MONOSPACED,15,15));
+		message.setFont(new Font(Font.MONOSPACED, 15, 15));
 		message.setText("");
 		message.setLineWrap(true);
 		add(radioPanel, BorderLayout.LINE_START);
 		add(message, BorderLayout.SOUTH);
-		setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+		setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 	}
-	
+
+	/**
+	 * This method satisfies the requirements for the ActionListener interface and
+	 * sets the textArea to the message generated from the DailyHoroscope class.
+	 * 
+	 * @param ActionEvent e
+	 */
 	public void actionPerformed(ActionEvent e) {
 		try {
 			message.setText(today.getMessage(e.getActionCommand()));
 		} catch (IOException i) {
 		}
 	}
-	
+
+	/**
+	 * This method creates the frame for the GUI and sets the content with what is
+	 * in the constructor.
+	 */
 	private static void createAndShowGUI() {
 		JFrame frame = new JFrame("Daily Horoscope");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JComponent newContentPane = new Driver();
-	    newContentPane.setOpaque(true);
-	    frame.setContentPane(newContentPane);
-	    frame.setPreferredSize(new Dimension(1500,400));
-	    frame.pack();
-	    frame.setVisible(true);
+		newContentPane.setOpaque(true);
+		frame.setContentPane(newContentPane);
+		frame.setPreferredSize(new Dimension(1500, 400));
+		frame.pack();
+		frame.setVisible(true);
 	}
-	
-	public static void main(String[] args) throws IOException{
-		
+
+	/**
+	 * This is the main method for the project and spawns the Event Dispatching
+	 * Thread for the GUI.
+	 * 
+	 * @param args
+	 * @throws IOException
+	 */
+	public static void main(String[] args) throws IOException {
+
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				createAndShowGUI();

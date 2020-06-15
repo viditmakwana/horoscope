@@ -2,14 +2,34 @@ import java.net.URL;
 import java.util.Scanner;
 import java.io.IOException;
 
+/**
+ * This class scrapes the webpage horoscope.com for the different signs and
+ * returns the appropriate message depending on the sign.
+ * 
+ * @author Vidit Makwana
+ *
+ */
 public class DailyHoroscope {
-	
+
 	String sign;
-	
+
+	/**
+	 * This method is a simple getter for the zodiac sign.
+	 * 
+	 * @return the sign
+	 */
 	public String getSign() {
 		return sign;
 	}
-	
+
+	/**
+	 * This method scrapes the webpage respective to the sign in the parameter and
+	 * returns today's message for that sign.
+	 * 
+	 * @param sign
+	 * @return the message respective to the sign in the parameter
+	 * @throws IOException
+	 */
 	public String getMessage(String sign) throws IOException {
 		this.sign = sign;
 		URL url = null;
@@ -59,9 +79,9 @@ public class DailyHoroscope {
 		scanner.close();
 		int startIndex = pageContent.indexOf("</strong> - ") + 11;
 		int endIndex = pageContent.indexOf("</p>");
-		String message = pageContent.substring(startIndex,endIndex);
+		String message = pageContent.substring(startIndex, endIndex);
 		return message;
-		
+
 	}
 
 }
